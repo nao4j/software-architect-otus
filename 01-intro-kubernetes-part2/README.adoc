@@ -1,0 +1,52 @@
+= Домашнее задание к лекции "Основы работы с Kubernetes (часть 2)"
+
+== Текст задания
+
+. Создать минимальный сервис, который
+.. отвечает на порту 8000
+.. имеет http-метод GET /health/ RESPONSE: {"status": "OK"}
+. Cобрать локально образ приложения в докер
+. Запушить образ в dockerhub
+. Написать манифесты для деплоя в k8s для этого сервиса. Манифесты должны описывать сущности Deployment, Service, Ingress
+.. В Deployment могут быть указаны Liveness, Readiness пробы
+.. Количество реплик должно быть не меньше 2
+.. Image контейнера должен быть указан с Dockerhub
+.. В Ingress-е должно быть правило, которое форвардит все запросы с /otusapp/{student name}/* на сервис с rewrite-ом пути. Где {student name} - это имя студента
+.. Хост в ингрессе должен быть arch.homework. В итоге после применения манифестов GET запрос на http://arch.homework/otusapp/{student name}/health должен отдавать {“status”: “OK”}
+
+На выходе предоставить
+
+. ссылку на github c манифестами. Манифесты должны лежать в одной директории, так чтобы можно было их все применить одной командой kubectl apply -f .
+. url, по которому можно будет получить ответ от сервиса (либо тест в postmanе).
+
+== Сборка образа
+
+```
+docker build -t health-check:1.0.0 .
+```
+
+== Деплой в Docker Hub
+
+```
+docker login
+docker tag health-check:1.0.0 nao4j/health-check:1.0.0
+docker push nao4j/health-check:1.0.0
+```
+
+== Запуск образа
+
+```
+docker run -p 8080:8080 nao4j/health-check:1.0.0
+```
+
+== Запуск задания
+
+```
+skaffold run
+```
+
+== Проверка задания
+
+```
+curl -H 'Host:arch.homework' http://{minikybe_ip}/otusapp/epilipenko/actuator/health
+```

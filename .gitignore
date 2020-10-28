@@ -3,3 +3,12 @@
 *.iml
 *.ims
 *.ipr
+
+### Java ###
+*.class
+*.jar
+*.war
+*.ear
+
+### Apache Maven ###
+.target/

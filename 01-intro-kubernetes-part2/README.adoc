@@ -48,5 +48,23 @@ skaffold run
 == Проверка задания
 
 ```
-curl -H 'Host:arch.homework' http://{minikybe_ip}/otusapp/epilipenko/actuator/health
+curl -H 'Host:arch.homework' {minikybe_ip}/otusapp/epilipenko/actuator/health
+```
+
+== Добавление в HOSTS
+
+Чтобы не добавлять хедер хоста, можно прописать IP minikube в HOSTS.
+
+Для этого необходимо вызвать команду
+
+```
+kubectl get ingress
+```
+
+И добавить в конец файла /etc/hosts полученные IP и хост.
+
+После этого команда проверки будет выглядеть следующим образом.
+
+```
+curl arch.homework/otusapp/epilipenko/actuator/health
 ```

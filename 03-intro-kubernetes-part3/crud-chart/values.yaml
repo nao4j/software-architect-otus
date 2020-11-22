@@ -1,0 +1,22 @@
+replicaCount: 2
+
+image:
+  repository: nao4j/crud
+
+service:
+  type: NodePort
+  port: 8080
+
+ingress:
+  enabled: true
+  hosts:
+    - host: arch.homework
+      paths: ['/otusapp/epilipenko($|/)(.*)']
+
+postgresql:
+  enabled: true
+  postgresqlUsername: postgres
+  postgresqlPassword: postgres
+  postgresqlDatabase: postgres
+  service:
+    port: "5432"

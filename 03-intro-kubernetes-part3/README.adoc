@@ -65,11 +65,5 @@ helm install crud-app ./crud-chart
 === Проверка работоспособности
 
 ```
-curl http://arch.homework/otusapp/epilipenko/actuator/health
-```
-
-=== Postman-коллекция
-
-```
-crud.postman_collection.json
+newman run crud.postman_collection.json
 ```

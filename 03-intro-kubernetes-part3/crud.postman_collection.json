@@ -6,66 +6,26 @@
 	},
 	"item": [
 		{
-			"name": "health",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{host}}/actuator/health",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"actuator",
-						"health"
-					]
+			"name": "Создание пользователя",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "87e1daf3-f967-462d-bf0f-041b5abf8aaf",
+						"exec": [
+							"var responseJSON = JSON.parse(responseBody)",
+							"pm.collectionVariables.set(\"userId\", responseJSON[\"id\"])"
+						],
+						"type": "text/javascript"
+					}
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "getAll",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{host}}/users",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{host}}/users/1",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"users",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "create",
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"rIvan\",\n    \"firstName\": \"Иван\",\n    \"lastName\": \"Петров\",\n    \"email\": \"rivan@gmail.com\",\n    \"phone\": \"88005553535\"\n}",
+					"raw": "{\n    \"username\": \"ivan\",\n    \"firstName\": \"Иван\",\n    \"lastName\": \"Петров\",\n    \"email\": \"ivan@mail.ru\",\n    \"phone\": \"88005553535\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -85,48 +45,100 @@
 			"response": []
 		},
 		{
-			"name": "update",
+			"name": "Получение пользователя",
 			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"id\": 1,\n    \"username\": \"rIvan\",\n    \"firstName\": \"Иван\",\n    \"lastName\": \"Иванов\",\n    \"email\": \"rivan@gmail.com\",\n    \"phone\": \"88005553535\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{host}}/users",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "delete",
-			"request": {
-				"method": "DELETE",
+				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/users/1",
+					"raw": "{{host}}/users/{{userId}}",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"users",
-						"1"
+						"{{userId}}"
 					]
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Изменение пользователя",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": {{userId}},\n    \"username\": \"ivan\",\n    \"firstName\": \"Иван\",\n    \"lastName\": \"Петров\",\n    \"email\": \"ivan@gmail.ru\",\n    \"phone\": \"88005553535\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/users",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Удаление пользователя",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/users/{{userId}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"users",
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "374ab804-14e2-4f5c-ba17-827e779b4206",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "92aef435-7fcd-4543-87f8-3eda344c3893",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "c3969d7a-a430-4e33-a666-2fc339228d75",
+			"key": "host",
+			"value": "arch.homework/otusapp/epilipenko"
+		},
+		{
+			"id": "6bcd83c7-1e51-4a3d-ab49-3669d6272732",
+			"key": "userId",
+			"value": ""
 		}
 	],
 	"protocolProfileBehavior": {}

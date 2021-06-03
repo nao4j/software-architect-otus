@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "apigateway-simple-app-chart.fullname" . }}
+  labels:
+    {{- include "apigateway-simple-app-chart.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: web
+  selector:
+    {{- include "apigateway-simple-app-chart.selectorLabels" . | nindent 4 }}

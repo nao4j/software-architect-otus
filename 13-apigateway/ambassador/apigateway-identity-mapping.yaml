@@ -1,0 +1,7 @@
+apiVersion: getambassador.io/v2
+kind:  Mapping
+metadata:
+  name:  apigateway-identity-mapping
+spec:
+  prefix: /auth
+  service: apigateway-identity:9000

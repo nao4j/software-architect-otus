@@ -1,0 +1,7 @@
+replicaCount: 1
+nameOverride: "apigateway-simple-app"
+image: "nao4j/apigateway-simple-app:1.0.0"
+
+service:
+  type: NodePort
+  port: 9000

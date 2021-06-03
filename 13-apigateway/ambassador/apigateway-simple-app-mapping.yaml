@@ -1,0 +1,8 @@
+apiVersion: getambassador.io/v2
+kind:  Mapping
+metadata:
+  name: apigateway-simple-app-mapping
+spec:
+  prefix: /user/me
+  service: apigateway-simple-app:9000
+  rewrite: ""

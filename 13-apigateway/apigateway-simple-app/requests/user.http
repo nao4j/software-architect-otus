@@ -1,0 +1,8 @@
+### get my profile
+GET {{host}}/user/me
+X-User-Login: iivanov
+X-User-First-Name: Ivan
+X-User-Last-Name: Ivanov
+
+### bad request to my profile
+GET {{host}}/user/me

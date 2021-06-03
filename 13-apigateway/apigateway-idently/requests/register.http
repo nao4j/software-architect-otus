@@ -1,0 +1,10 @@
+### new user
+POST {{host}}/register
+Content-Type: application/json
+
+{
+  "login": "test",
+  "password": "123",
+  "firstName": "Ivan",
+  "lastName": "Ivanov"
+}

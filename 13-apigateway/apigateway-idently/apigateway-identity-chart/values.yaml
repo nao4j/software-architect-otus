@@ -1,0 +1,23 @@
+replicaCount: 1
+nameOverride: "apigateway-identity"
+image: "nao4j/apigateway-idently:1.0.0"
+
+service:
+  type: NodePort
+  port: 9000
+
+postgresql:
+  enabled: true
+  postgresqlDatabase: postgres
+  postgresqlUsername: postgres
+  postgresqlPassword: postgres
+  persistence:
+    size: 0.1Gi
+  service:
+    port: "5432"
+
+ingress:
+  enabled: false
+  hosts:
+    - host: arch.homework
+      paths: ["/login", "/register"]

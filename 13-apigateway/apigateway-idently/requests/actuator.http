@@ -1,0 +1,5 @@
+### all
+GET {{host}}/actuator
+
+### health
+GET {{host}}/actuator/health

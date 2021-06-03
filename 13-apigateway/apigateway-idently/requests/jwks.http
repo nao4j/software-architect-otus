@@ -1,0 +1,2 @@
+### get jwks
+GET {{host}}/.well-known/jwks.json

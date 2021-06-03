@@ -1,0 +1,5 @@
+apiVersion: v2
+name: apigateway-simple-app-chart
+type: application
+version: 1.0.0
+appVersion: 1.0.0

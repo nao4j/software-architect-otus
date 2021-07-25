@@ -1,0 +1,16 @@
+apiVersion: v2
+name: idempotency-order-service-chart
+description: A Helm chart for install Idempotency Order Service
+
+type: application
+
+version: 1.0.0
+appVersion: 3.0.0
+
+dependencies:
+  - name: postgresql
+    version: 8.7.2
+    repository: https://charts.bitnami.com/bitnami
+    condition: postgresql.enabled
+    tags:
+      - idempotency-order-service-postgres

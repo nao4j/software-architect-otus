@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: idempotency-order-service-secret
+type: Opaque
+data:
+  POSTGRES_URL: {{ printf "jdbc:postgresql://%s:%s/%s?currentSchema=order_service" (include "postgresql.fullname" .) .Values.postgresql.service.port .Values.postgresql.postgresqlDatabase | b64enc | quote }}
+  POSTGRES_USER: {{ .Values.postgresql.postgresqlUsername | b64enc | quote }}
+  POSTGRES_PASSWORD: {{ .Values.postgresql.postgresqlPassword | b64enc | quote }}

@@ -1,5 +1,5 @@
 ### JetBrains INTELLIJ IDEA ###
-**/.idea/**
+.idea/
 *.iml
 *.ims
 *.ipr
@@ -11,4 +11,4 @@
 *.ear
 
 ### Apache Maven ###
-**/.target/**
+.target/

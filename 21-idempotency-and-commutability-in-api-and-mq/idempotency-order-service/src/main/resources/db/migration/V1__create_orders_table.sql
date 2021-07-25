@@ -1,0 +1,5 @@
+CREATE TABLE orders (
+    id VARCHAR(36) NOT NULL PRIMARY KEY,
+    user_id VARCHAR(36) NOT NULL,
+    received_at TIMESTAMP NOT NULL
+);

@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "idempotency-order-service-chart.fullname" . }}
+  labels:
+  {{- include "idempotency-order-service-chart.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+  {{- include "idempotency-order-service-chart.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+      {{- include "idempotency-order-service-chart.selectorLabels" . | nindent 8 }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/config.yaml") . | sha256sum }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          ports:
+            - name: web
+              containerPort: 8080
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /actuator/health
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /actuator/health
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          env:
+            - name: spring.datasource.url
+              valueFrom:
+                secretKeyRef:
+                  name: idempotency-order-service-secret
+                  key: POSTGRES_URL
+            - name: spring.datasource.username
+              valueFrom:
+                secretKeyRef:
+                  name: idempotency-order-service-secret
+                  key: POSTGRES_USER
+            - name: spring.datasource.password
+              valueFrom:
+                secretKeyRef:
+                  name: idempotency-order-service-secret
+                  key: POSTGRES_PASSWORD
